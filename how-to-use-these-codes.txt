@@ -1,0 +1,83 @@
+How to use these codes -- edition1  (milestone2)
+---------------------------------------------------------------------------------
+
+Part1 -- Ports.
+
+(Each component has a specific port.)
+
+   Servers: 9000 + index 
+   Clients: 5000 + index
+       GFD: 8000
+   LFD-GFD: 2000 + index 
+LFD-Server: 3000 + index
+        RM: 6000
+
+index could be any integers, so far for the project, they are in (1, 2, 3)
+
+---------------------------------------------------------------------------------
+
+Part2 -- Practice.
+
+(Using these codes to implement demo of milestone2.)
+
+1. Open 10 places to run these codes. 
+   (3 for servers, 3 for clients, 3 for lfds, 1 for gfd.)
+
+2. run gfd. 
+   type in : 'python GFD.py freq'
+   (eg: python GFD.py 5) 
+   [5 here means check lfds every 5s.]
+
+3. run lfd1, lfd2, lfd3.
+   type in : 'python lfd.py freq index'  
+   (eg: python LFD.py 2000 1; python LFD.py 2000 2; python LFD.py 2000 3)
+   [1 here means this lfd is used to heartbeat server1; 2000 here means this lfd's heartbeat frequency is 1heartbeat/2s]
+
+4. run server1, server2, server3. 
+   type in : 'python server.py index'
+   (eg: python server.py 1; python server.py 2; python server.py 3)
+   [1 here means the server we start right now is server1.]
+
+5. run client1, client2, client3.
+   type in : 'python client.py index'
+   (eg: python client.py 1; python client.py 2; python client.py 3)
+   [1 here means the client we started right now is client1.]
+
+---------------------------------------------------------------------------------So far you can run the entire project for milestone 2.
+---------------------------------------------------------------------------------
+
+Extra:
+
+Part3 -- Function of each file.
+
+1. Server.py 
+   (Used to run three servers.)
+
+2. Client.py
+   (Used to run three clients.)
+
+3. LFD.py
+   (Used to run three lfds.)
+
+4. GFD.py
+   (Used to run gfd.)
+
+5. client1/2/3_counter.json
+   (Used to store the index of messages of each client. Like req C1,101)
+
+6. initialize_counters.py
+   (Used to initialize client1/2/3_counter to 1)
+
+---------------------------------------------------------------------------------
+
+Part4 -- Protocols and conventions.
+
+1. Variable naming convention:
+1.1. Message: messages sent to xxx should be named as message_to_xxx
+1.2. Socket: in xxx.py, if the socket works as a server socket, it should be named as tcp_xxx_socket;
+                        or it should be named as tcp_yyy_socket, where yyy represents the server it connects to.
+1.3. Global variable and constants should be in capital letters
+1.4. Local variable should be in lower case letters
+
+1. Client.py
+-- Server: 'Client {} - Request {} - {}'.format(index, '{0:03d}'.format(counter), data)
